@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <StartupObject>FileTabifyer_Spaces.Program</StartupObject>
+    <Title>File Tabifyer PDF Tables to Tabs</Title>
+    <Authors>Michael Gautier</Authors>
+    <Company>Michael Gautier</Company>
+    <Description>Uses the open source XPDF Utils package pdftotext to convert a PDF containing data in table layout to spaces. The space delimited text is then read in by the program to convert the spaces to tabs for easier modification in spreadsheets, databases or other data conversion and import processes.</Description>
+    <Copyright>2024 Michael Gautier under GPL 3 License</Copyright>
+    <PackageProjectUrl>https://gautiertalkstechnology.wordpress.com/2024/06/01/convert-space-delimited-to-tabs/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/michaelgautier/File-Tabifyer-Series-CS</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="pdftotext.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

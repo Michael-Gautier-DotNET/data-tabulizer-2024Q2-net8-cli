@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FileTabifyer_Spaces": {
+      "commandName": "Project",
+      "commandLineArgs": "--pdfs_dir \"C:\\Users\\Michael Gautier\\Downloads\\PDFsToConvert\" --output_dir \"C:\\Users\\Michael Gautier\\Downloads\\TsvFiles\""
+    }
+  }
+}
