@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (C) 2024 Michael Gautier
+Copyright (C) 2025 Michael Gautier
 
 This source code is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.
 
@@ -20,8 +20,8 @@ namespace FileTabifyer_Spaces
         private static string _PathToSourcePDFs = string.Empty;
         private static string _PathToOutputDir = string.Empty;
 
-        private const string _ExeNamePDFConvertToText = "pdftotext.exe";
-        private const string _PDFConvertToTextExeFlags = "-table -eol dos -f 3 -l 3";
+        private static readonly string _ExeNamePDFConvertToText = "pdftotext.exe";
+        private static readonly string _PDFConvertToTextExeFlags = "-table -eol dos -f 3 -l 3";
 
         static void Main(string[] args)
         {
@@ -46,7 +46,7 @@ namespace FileTabifyer_Spaces
 
                     bool ProcessExitSuccess = ProcessResult?.WaitForExit(120000) ?? false;
 
-                    if (ProcessExitSuccess == false)
+                    if (ProcessExitSuccess is false)
                     {
                         Console.WriteLine("Process Failed.");
                     }
@@ -55,7 +55,7 @@ namespace FileTabifyer_Spaces
                         using StreamReader Reader = new(OutputFilePathSpaceDelimited);
                         using StreamWriter Writer = new(OutputFilePathTabDelimited);
 
-                        while(Reader.EndOfStream == false)
+                        while (Reader.EndOfStream is false)
                         {
                             string FileLine = Reader.ReadLine() ?? string.Empty;
 
@@ -75,10 +75,8 @@ namespace FileTabifyer_Spaces
             return;
         }
 
-        private static string TabifySpaceDelimitedText(string text)
+        private static string TabifySpaceDelimitedText(in string text)
         {
-            string Output = string.Empty;
-
             List<string> Result = [];
 
             int IndexOfSpace = -1;
@@ -91,7 +89,7 @@ namespace FileTabifyer_Spaces
             {
                 char CurrentChar = text[IndexOfChar];
 
-                if(CurrentChar == ' ')
+                if (CurrentChar is ' ')
                 {
                     IndexOfSpace = IndexOfChar;
                 }
@@ -99,7 +97,7 @@ namespace FileTabifyer_Spaces
                 {
                     IndexOfRecentLetter = IndexOfChar;
 
-                    if(IndexOfFirstLetter < 0)
+                    if (IndexOfFirstLetter < 0)
                     {
                         IndexOfFirstLetter = IndexOfChar;
                     }
@@ -123,9 +121,7 @@ namespace FileTabifyer_Spaces
                 }
             }
 
-            Output = string.Join('\t', Result);
-
-            return Output;
+            return string.Join('\t', Result);
         }
 
         private static bool ValidateStartupConditions()
@@ -142,13 +138,13 @@ namespace FileTabifyer_Spaces
                 Directory.CreateDirectory(_PathToOutputDir);
             }
 
-            if (Directory.Exists(_PathToSourcePDFs) == false)
+            if (Directory.Exists(_PathToSourcePDFs) is false)
             {
                 InvalidConditionsCount++;
                 Console.WriteLine("Invalid Output Directory specified.");
             }
 
-            if (Directory.Exists(_PathToOutputDir) == false)
+            if (Directory.Exists(_PathToOutputDir) is false)
             {
                 InvalidConditionsCount++;
                 Console.WriteLine("Invalid Output Directory specified.");
@@ -157,12 +153,12 @@ namespace FileTabifyer_Spaces
             return InvalidConditionsCount == 0;
         }
 
-        private static void InterpretConsoleParameters(string[] args)
+        private static void InterpretConsoleParameters(in string[] args)
         {
             if (args.Length > 3)
             {
-                string[] type_args = { args[0], args[2] };
-                string[] value_args = { args[1], args[3] };
+                string[] type_args = [args[0], args[2]];
+                string[] value_args = [args[1], args[3]];
 
                 if (type_args.Length < args.Length / 2)
                 {
@@ -182,6 +178,7 @@ namespace FileTabifyer_Spaces
                             _PathToOutputDir = value_args[i];
                             break;
                     }
+
                 }
             }
 
